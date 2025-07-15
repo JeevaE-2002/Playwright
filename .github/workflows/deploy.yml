@@ -1,9 +1,10 @@
-name: Test and Deploy Static Site to GitHub Pages
+name: Test and Deploy Static Site
 
 on:
   push:
     branches: [main]
-  workflow_dispatch:
+  pull_request:
+    branches: [main]
 
 permissions:
   contents: read
@@ -16,24 +17,23 @@ concurrency:
 
 jobs:
   test:
+    name: Run Playwright Tests
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 18
 
       - name: Cache npm dependencies
         uses: actions/cache@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
 
       - name: Install dependencies
         run: npm ci
@@ -45,6 +45,8 @@ jobs:
         run: npx playwright test
 
   deploy:
+    name: Deploy to GitHub Pages
+    if: github.event_name == 'push'  # Only run on push to main, not PRs
     needs: test
     runs-on: ubuntu-latest
     environment:
@@ -58,10 +60,10 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload static site
+      - name: Upload static files
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'  # Assumes index.html is in root
+          path: '.'  # Ensure index.html is here
 
       - name: Deploy to GitHub Pages
         id: deployment
