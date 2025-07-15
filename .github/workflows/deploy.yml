@@ -2,7 +2,7 @@ name: Deploy Static Site to GitHub Pages
 
 on:
   push:
-    branches: [main] 
+    branches: [main]
 
 permissions:
   contents: read
@@ -14,6 +14,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
 
     steps:
@@ -26,7 +27,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'  # Make sure index.html is at root
+          path: '.'  # index.html must be in the root
 
       - name: Deploy to GitHub Pages
         id: deployment
