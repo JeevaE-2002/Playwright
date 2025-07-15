@@ -1,0 +1,32 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log
+
+# ✅ KEEP package-lock.json for CI consistency
+# ❌ REMOVE this line:
+# package-lock.json
+
+# Playwright
+playwright-report/
+test-results/
+*.zip
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+# VSCode
+.vscode/
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.local
+.env.*.local

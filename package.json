@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "test": "playwright test"
+  },
+
+  "dependencies": {
+    "@playwright/test": "^1.54.1",
+    "playwright": "^1.54.1"
+  }
+}
