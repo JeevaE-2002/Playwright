@@ -10,5 +10,5 @@ test('homepage content is correct', async ({ page }) => {
   await expect(page.locator('h1')).toHaveText('Hello, GitHub Pages!');
 
   // Check paragraph content
-  await expect(page.locator('p')).toHaveText('This site is hosted with GitHub Pages by Jeeva E');
+  await expect(page.locator('p')).toHaveText('This site is hosted with GitHub Pages by Jeeva.E');
 });
