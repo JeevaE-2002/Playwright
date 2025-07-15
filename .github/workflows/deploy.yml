@@ -26,7 +26,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'  # or change to 'dist' if you build
+          path: '.'
+          name: github-pages  # ✅ REQUIRED FIX
 
       - name: Deploy to GitHub Pages
         id: deployment
