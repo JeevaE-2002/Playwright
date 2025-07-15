@@ -2,9 +2,9 @@ name: Test and Deploy Static Site
 
 on:
   push:
-    branches: [main]
+    branches: [main, devhub]
   pull_request:
-    branches: [main]
+    branches: [main, devhub]
 
 permissions:
   contents: read
@@ -46,7 +46,7 @@ jobs:
 
   deploy:
     name: Deploy to GitHub Pages
-    if: github.event_name == 'push'  # Only run on push to main, not PRs
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     needs: test
     runs-on: ubuntu-latest
     environment:
